@@ -2,3 +2,15 @@ on:
   push:
     branches:
       - master
+      - develop
+jobs:
+  connect:
+    name: Connect to server
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Sleep and Run
+      run: |
+        echo "Sleeping for 10"
+        sleep 10
+
