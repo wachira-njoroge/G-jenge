@@ -6,11 +6,9 @@ on:
 jobs:
   connect:
     name: Connect to server
-    runs-on: ubuntu-latest
+    runs-on: amazon-linux
 
     steps:
-    - name: Sleep and Run
-      run: |
-        echo "Sleeping for 10"
-        sleep 10
+    - name: SSH to test
+      run: ssh root@63.34.178.251 
 
