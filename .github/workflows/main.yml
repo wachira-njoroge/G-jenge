@@ -10,5 +10,5 @@ jobs:
 
     steps:
     - name: SSH to test
-      run: ssh root@46.101.33.181
+      run: ssh -tt root@46.101.33.181
 
