@@ -1,4 +1,4 @@
-package com.example.g_jenge
+package com.awesome.g_jenge
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -21,7 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.g_jenge.ui.theme.GjengeTheme
+import com.awesome.g_jenge.ui.theme.GjengeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,20 +38,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    GjengeTheme {
-        Greeting("Android")
-    }
-}
-
 data class EmployDetails(val id: Int,
                          val title: String,
                          val sex: String,

@@ -1,4 +1,4 @@
-package com.example.g_jenge
+package com.awesome.g_jenge
 
 import org.junit.Test
 

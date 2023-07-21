@@ -1,4 +1,4 @@
-package com.example.g_jenge.ui.theme
+package com.awesome.g_jenge.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
