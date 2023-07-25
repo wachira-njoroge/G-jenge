@@ -1,6 +1,8 @@
 package com.awesome.g_jenge
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
@@ -18,26 +20,39 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.awesome.g_jenge.ui.theme.GjengeTheme
+import com.awesome.g_jenge.viewmodel.AppViewModel
 
 class MainActivity : ComponentActivity() {
+    private lateinit var appViewModel: AppViewModel
+    companion object {
+
+        lateinit  var appContext: Context
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        appContext = applicationContext
+        appViewModel = AppViewModel(appContext)
+        appViewModel.allProjects.observe(this){
+                projects ->
+            run {
+                Log.i("Projects", "onCreate: Projects in db -->> ${projects.size}")
+            }
+        }
         setContent {
-            //Greeting("wachira")
-            //DetailsContent()
             GjengeTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
+                Surface(color = MaterialTheme.colors.background) {
                     DetailsContent()
                 }
             }
         }
+
     }
-}
+
 data class EmployDetails(val id: Int,
                          val title: String,
                          val sex: String,
@@ -160,5 +175,5 @@ fun DetailsContent() {
 
     }
 
-
+}
 }
