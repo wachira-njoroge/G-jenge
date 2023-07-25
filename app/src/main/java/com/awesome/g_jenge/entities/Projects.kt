@@ -1,6 +1,5 @@
 package com.awesome.g_jenge.entities
 
-import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -8,7 +7,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "projects")
 data class Projects(
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     var id: Int,
 
     @ColumnInfo(name="code")

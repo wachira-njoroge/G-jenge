@@ -1,6 +1,5 @@
 package com.awesome.g_jenge.entities
 
-import androidx.annotation.NonNull
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
 
@@ -11,7 +10,6 @@ import androidx.room.ForeignKey.CASCADE
 )
 data class Tasks(
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     val id: Int,
 
     @ColumnInfo(name="code", index = true)
