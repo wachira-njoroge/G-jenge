@@ -19,7 +19,7 @@ abstract class GjengeDatabase: RoomDatabase() {
             // if the INSTANCE is not null, return it otherwise create the database
             return INSTANCE ?: synchronized(this){
                 val dbInstance = Room
-                    .databaseBuilder(context.applicationContext,GjengeDatabase::class.java, "Gjenge-")
+                    .databaseBuilder(context.applicationContext,GjengeDatabase::class.java, "Gjenge")
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = dbInstance
