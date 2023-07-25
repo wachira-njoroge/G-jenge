@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 //This class is intended to get data records to display on the UI, observe and update data changes on the UI
 class AppViewModel(ctx: Context):ViewModel(){
-    val database by lazy{
+    private val database by lazy{
         GjengeDatabase.dbInit(ctx)
     }
     private val projectsService by lazy {
