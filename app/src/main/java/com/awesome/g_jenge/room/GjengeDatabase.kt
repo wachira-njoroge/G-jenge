@@ -9,7 +9,7 @@ import com.awesome.g_jenge.dao.TasksDao
 import com.awesome.g_jenge.entities.Projects
 import com.awesome.g_jenge.entities.Tasks
 
-@Database(entities = [Projects::class, Tasks::class], version=4, exportSchema = false)
+@Database(entities = [Projects::class, Tasks::class], version=5, exportSchema = false)
 abstract class GjengeDatabase: RoomDatabase() {
     companion object{
         //Singleton prevents opening multiple instances of the same database
