@@ -26,9 +26,9 @@ class AppViewModel(ctx: Context):ViewModel(){
     //PROJECTS DATA:-
     //
     //Get all projects
-    val allProjects = projectsService.allProjects.asLiveData()
+    val allProjects = projectsService.allProjects
     //New Project insert
-    suspend fun insertProject(project: Projects) = viewModelScope.launch{
+    fun insertProject(project: Projects) = viewModelScope.launch{
         projectsService.insertProject(project)
     }
     //Get project by name
