@@ -10,6 +10,7 @@ import com.awesome.g_jenge.entities.Tasks
 import com.awesome.g_jenge.room.GjengeDatabase
 import com.awesome.g_jenge.services.ProjectsService
 import com.awesome.g_jenge.services.TasksService
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 //This class is intended to get data records to display on the UI, observe and update data changes on the UI
@@ -41,8 +42,8 @@ class AppViewModel(ctx: Context):ViewModel(){
     }
     //
     //TASKS DATA:-
-    fun getProjectTasks(project:String): LiveData<List<Tasks>> {
-        return tasksService.getProjectTasks(project).asLiveData()
+    fun getProjectTasks(project:String): Flow<List<Tasks>> {
+        return tasksService.getProjectTasks(project)
     }
     fun insertTask(task: Tasks) = viewModelScope.launch{
         tasksService.insertTask(task)
