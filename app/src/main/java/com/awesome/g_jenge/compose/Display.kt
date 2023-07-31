@@ -12,8 +12,9 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -21,62 +22,70 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.awesome.g_jenge.entities.Tasks
+import com.awesome.g_jenge.viewmodel.AppViewModel
 
-class Display() {
-
-    data class EmployDetails(val id: Int,
-                             val title: String,
-                             val sex: String,
-                             val age: Int,
-                             val description: String)
-    //
-    object Details {
-
-        val EmployDetailsList = listOf(
-            EmployDetails(
-                id = 1,
-                title = "Rohan",
-                sex = "Male",
-                age = 24,
-                description = " Don't judge each day by the harvest you reap but by the seeds that you plant.” - ...",
-                //ImageId = R.drawable.rohan
-            ),
-            EmployDetails(
-                id = 2,
-                title = "Roy",
-                sex = "male",
-                age = 25,
-                description = " Don't judge each day by the harvest you reap but by the seeds that you plant.” - ...",
-                //ImageId = R.drawable.roy
-            ),
-            EmployDetails(
-                id = 3,
-                title = "Vishal",
-                sex = "Male",
-                age = 29,
-                description = " Don't judge each day by the harvest you reap but by the seeds that you plant.” - ...",
-                //ImageId = R.drawable.vishal
-            ),
-            EmployDetails(
-                id = 4,
-                title = "Nikhil",
-                sex = "Male",
-                age = 27,
-                description = " Don't judge each day by the harvest you reap but by the seeds that you plant.” - ...",
-                //ImageId = R.drawable.nikhil
-            ),
-            EmployDetails(
-                id = 2,
-                title = "Roy Ray",
-                sex = "male",
-                age = 25,
-                description = " Don't judge each day by the harvest you reap but by the seeds that you plant.” - ...",
-                //ImageId = R.drawable.roy
-            )
-        )
-    }
+interface Display{
+    //Gridview card item
     @Composable
-    fun EmployeeCard(emp: EmployDetails) {
+    fun gridItem(text: String) {
+        Card(
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth(),
+            shape = RoundedCornerShape(8.dp),
+            backgroundColor = Color.LightGray
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .padding(16.dp)
+                    .height(100.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(text = text, textAlign = TextAlign.Center)
+            }
+        }
+    }
+    //Grid view display
+    @Composable
+    fun gridView(appViewModel: AppViewModel) {
+        val savedProjects by appViewModel.allProjects.collectAsState(initial = emptyList())
+        Column(modifier = Modifier.fillMaxSize()) {
+            // LazyColumn to make the grid items scrollable
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                modifier = Modifier.weight(1f),
+
+                ) {
+                items(savedProjects.size) { index ->
+                    gridItem(text = savedProjects[index].name)
+                }
+            }
+            // Add Button to add new goal at the bottom
+            Button(
+                onClick = {
+                    // 1.Open a dialog for the user to input project details
+                    // 2.Validate input
+                    // 3.Save project
+
+//                    val newProject = Projects(null, "PR-23-07-002","Bills","New")
+//                    appViewModel.insertProject(newProject)
+                },
+                modifier = Modifier
+                    .padding(4.dp)
+                    .fillMaxWidth()
+                    .height(56.dp)
+            ) {
+                Text(text = "Add A Goal")
+            }
+        }
+    }
+    //Task card view
+    @Composable
+    fun tasksCard(task: Tasks) {
         Card(
             modifier = Modifier
                 .padding(horizontal = 8.dp, vertical = 8.dp)
@@ -91,7 +100,7 @@ class Display() {
                 Column(modifier = Modifier.weight(1f),
                     Arrangement.Center) {
                     Text(
-                        text = emp.title,
+                        text = task.description,
                         style = TextStyle(
                             color = Color.Black,
                             fontSize = 22.sp,
@@ -99,111 +108,27 @@ class Display() {
                         )
                     )
                     Text(
-                        text = "Age :- "+emp.age.toString(),
-                        style = TextStyle(
-                            color = Color.Black,
-                            fontSize = 15.sp
-                        )
-                    )
-                    Text(
-                        text = "Sex :- "+emp.sex,
-                        style = TextStyle(
-                            color = Color.Black,
-                            fontSize = 15.sp
-                        )
-                    )
-
-                    Text(
-                        text = "Description :- "+emp.description,
+                        text = "Due on :- " + task.due_date,
                         style = TextStyle(
                             color = Color.Black,
                             fontSize = 15.sp
                         )
                     )
                 }
-//            Image(painter = painterResource(emp.ImageId), contentDescription = "Profile Image",
-//                contentScale = ContentScale.FillHeight,
-//                modifier = Modifier
-//                    .padding(8.dp)
-//                    .size(110.dp)
-//                    .clip((CircleShape)  ))
             }
         }
     }
+    //Tasks by project display
     @Composable
-    fun DetailsContent() {
-
-        val employees = remember { Details.EmployDetailsList }
+    fun tasksByProject(appviewmodel:AppViewModel,project: String) {
+        val tasks by appviewmodel.getProjectTasks(project).collectAsState(initial = emptyList())
         LazyColumn(
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
         ) {
             items(
-                employees
+                tasks
             ) {
-                EmployeeCard(emp = it)
-            }
-
-        }
-
-    }
-    //
-    //.............................new
-
-    @Composable
-    fun GridViewWithAddButton() {
-        // Sample list of grid items
-        val gridItems = remember {
-            mutableStateListOf(
-                "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8"
-            )
-        }
-
-        Column(modifier = Modifier.fillMaxSize()) {
-            // LazyColumn to make the grid items scrollable
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                modifier = Modifier.weight(1f),
-
-            ) {
-                items(gridItems.size) { index ->
-                    GridItem(text = gridItems[index])
-                }
-            }
-
-            // Add Button at the bottom
-            Button(
-                onClick = {
-                    // Add a new grid item when the button is clicked
-                    val newItem = "Item ${gridItems.size + 1}"
-                    gridItems.add(newItem)
-                },
-                modifier = Modifier
-                    .padding(4.dp)
-                    .fillMaxWidth()
-                    .height(56.dp)
-            ) {
-                Text(text = "Add Item")
-            }
-        }
-    }
-
-    @Composable
-    fun GridItem(text: String) {
-        Card(
-            modifier = Modifier
-                .padding(8.dp)
-                .fillMaxWidth(),
-
-            shape = RoundedCornerShape(8.dp),
-            backgroundColor = Color.LightGray
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-                    .height(100.dp)
-            ) {
-                Text(text = text, modifier = Modifier, textAlign = TextAlign.Center)
+                tasksCard(task = it)
             }
         }
     }

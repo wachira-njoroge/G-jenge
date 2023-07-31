@@ -1,7 +1,6 @@
 package com.awesome.g_jenge
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
@@ -10,7 +9,7 @@ import com.awesome.g_jenge.compose.Display
 import com.awesome.g_jenge.ui.theme.GjengeTheme
 import com.awesome.g_jenge.viewmodel.AppViewModel
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(),Display {
     //
     private lateinit var appViewModel: AppViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,19 +21,11 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
                     //DetailsContent()
-                   Display().GridViewWithAddButton()
+                   gridView(appViewModel)
+                   //DetailsContent(appViewModel)
                 }
             }
         }
 
     }
-    fun appProjects(){
-        appViewModel.allProjects.observe(this){
-            projects ->
-            run {
-                Log.i("Projects", "onCreate: Projects in db -->> ${projects.size}")
-            }
-        }
-    }
-
 }

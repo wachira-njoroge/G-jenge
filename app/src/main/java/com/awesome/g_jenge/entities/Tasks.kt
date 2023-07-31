@@ -10,7 +10,7 @@ import androidx.room.ForeignKey.CASCADE
 )
 data class Tasks(
     @PrimaryKey(autoGenerate = true)
-    val id: Int? = null,
+    val id: Int?,
 
     @ColumnInfo(name="code", index = true)
     val code: String,
