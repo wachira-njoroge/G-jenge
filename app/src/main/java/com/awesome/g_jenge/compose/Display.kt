@@ -2,6 +2,7 @@ package com.awesome.g_jenge.compose
 
 import android.app.Application
 import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -31,13 +32,14 @@ import com.awesome.g_jenge.viewmodel.AppViewModel
 interface Display{
     //Gridview card item
     @Composable
-    fun gridItem(text: String) {
+    fun gridItem(appViewModel: AppViewModel,project: Projects) {
         Card(
             modifier = Modifier
                 .padding(8.dp)
                 .fillMaxWidth(),
             shape = RoundedCornerShape(8.dp),
             backgroundColor = Color.LightGray
+
         ) {
             Column(
                 modifier = Modifier
@@ -48,7 +50,7 @@ interface Display{
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = text, textAlign = TextAlign.Center)
+                Text(project.name, textAlign = TextAlign.Center)
             }
         }
     }
@@ -64,7 +66,7 @@ interface Display{
 
                 ) {
                 items(savedProjects.size) { index ->
-                    gridItem(text = savedProjects[index].name)
+                    gridItem(appViewModel,savedProjects[index])
                 }
             }
             // Add Button to add new goal at the bottom
@@ -124,8 +126,8 @@ interface Display{
     }
     //Tasks by project display
     @Composable
-    fun tasksByProject(appviewmodel:AppViewModel,project: String) {
-        val tasks by appviewmodel.getProjectTasks(project).collectAsState(initial = emptyList())
+    fun tasksByProject(appViewModel: AppViewModel, project: Projects) {
+        val tasks by appViewModel.getProjectTasks(project.name).collectAsState(initial = emptyList())
         LazyColumn(
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
         ) {
