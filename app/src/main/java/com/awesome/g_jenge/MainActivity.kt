@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity(),Display {
     private lateinit var appViewModel: AppViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appViewModel = AppViewModel(applicationContext)
+        appViewModel = AppViewModel(this.application)
 
         setContent {
             GjengeTheme {

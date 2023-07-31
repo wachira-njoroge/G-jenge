@@ -1,5 +1,7 @@
 package com.awesome.g_jenge.compose
 
+import android.app.Application
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -22,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.awesome.g_jenge.entities.Projects
 import com.awesome.g_jenge.entities.Tasks
 import com.awesome.g_jenge.viewmodel.AppViewModel
 
@@ -67,12 +70,13 @@ interface Display{
             // Add Button to add new goal at the bottom
             Button(
                 onClick = {
+                    Toast.makeText(appViewModel.getApplication(), "Clicked today", Toast.LENGTH_SHORT).show()
                     // 1.Open a dialog for the user to input project details
                     // 2.Validate input
                     // 3.Save project
 
-//                    val newProject = Projects(null, "PR-23-07-002","Bills","New")
-//                    appViewModel.insertProject(newProject)
+                    val newProject = Projects(null, "PR-23-07-002","Bills","New")
+                    appViewModel.insertProject(newProject)
                 },
                 modifier = Modifier
                     .padding(4.dp)

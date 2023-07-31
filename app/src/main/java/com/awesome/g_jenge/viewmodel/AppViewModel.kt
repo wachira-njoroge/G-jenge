@@ -1,8 +1,8 @@
 package com.awesome.g_jenge.viewmodel
 
-import android.content.Context
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.awesome.g_jenge.entities.Projects
@@ -14,9 +14,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 //This class is intended to get data records to display on the UI, observe and update data changes on the UI
-class AppViewModel(ctx: Context):ViewModel(){
+class AppViewModel(application: Application):AndroidViewModel(application){
     private val database by lazy{
-        GjengeDatabase.dbInit(ctx)
+        GjengeDatabase.dbInit(getApplication<Application>().applicationContext)
     }
     private val projectsService by lazy {
         ProjectsService(database.projectsDao())
