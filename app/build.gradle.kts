@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
+    id ("com.google.devtools.ksp")
 }
 
 android {
@@ -16,9 +16,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-//        vectorDrawables {
-//            useSupportLibrary = true
-//        }
+
     }
 
     buildTypes {
@@ -41,7 +39,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.7"
     }
     packaging {
         resources {
@@ -66,7 +64,7 @@ dependencies {
 
     implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.20")
     implementation("androidx.room:room-common:2.6.1")
-    kapt ("androidx.room:room-compiler:2.6.1")
+    ksp ("androidx.room:room-compiler:2.6.1")
     //
     //Lifecycle dependencies
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
