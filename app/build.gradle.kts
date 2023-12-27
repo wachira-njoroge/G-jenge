@@ -54,17 +54,17 @@ dependencies {
     //Former dependencies
     //
     //navigation dependencies
-    implementation ("androidx.navigation:navigation-compose:2.4.0-alpha10")
+    implementation ("androidx.navigation:navigation-compose:2.7.6")
     //room dependencies...
-    implementation ("androidx.appcompat:appcompat:1.4.1")
-    implementation ("androidx.activity:activity-ktx:1.4.0")
+    implementation ("androidx.appcompat:appcompat:1.6.1")
+    implementation ("androidx.activity:activity-ktx:1.8.2")
     //
     // Room dependencies
     implementation ("androidx.room:room-ktx:2.6.1")
     implementation ("androidx.room:room-runtime:2.6.1")
-    implementation ("androidx.work:work-runtime-ktx:2.7.1")
+    implementation ("androidx.work:work-runtime-ktx:2.9.0")
 
-    implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.0.0")
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.20")
     implementation("androidx.room:room-common:2.6.1")
     kapt ("androidx.room:room-compiler:2.6.1")
     //
