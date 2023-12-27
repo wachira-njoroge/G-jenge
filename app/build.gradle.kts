@@ -69,9 +69,9 @@ dependencies {
     kapt ("androidx.room:room-compiler:2.6.1")
     //
     //Lifecycle dependencies
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
-    implementation ("androidx.lifecycle:lifecycle-common-java8:2.4.0")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    implementation ("androidx.lifecycle:lifecycle-common-java8:2.6.2")
     //
     //
 
